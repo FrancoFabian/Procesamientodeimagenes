@@ -1,0 +1,104 @@
+.side-menu{
+    overflow: hidden;
+    
+    position: fixed;
+    z-index: 13;
+    background: #16171e;
+    background-image: linear-gradient(to top, #14141b 40%, #120426 100%);
+    width: 60px;
+    height:90vh;
+    box-sizing: border-box;
+    padding-top: 30px ;
+    padding-left: 7px;
+    padding-right: 5px;
+    border-right:1px solid #43465e;
+    transition: all 0.4s ease; 
+  
+  }
+  .item-menu{
+    width: 95%;
+    height: 40px;
+    margin-top: 4px;
+    color: #5C607E;
+    overflow: hidden;
+  /*  */
+    display: flex;
+    
+    align-items: center;
+    border-radius: 5px;
+    
+  }
+  .side-menu.active{
+   
+    position: fixed;
+    z-index: 13;
+    background-image: linear-gradient(to top, #16171e 40%, #0d031c 100%);
+    transition: all 0.6s ease-out; 
+   
+    width: 200px;
+    height:90vh;
+    box-sizing: border-box;
+    padding-top: 30px ;
+    padding-left: 10px;
+    padding-right: 5px;
+    border-right:1px solid #ab3bf5;
+    
+  }
+  .item-menu.coloractive{
+    color: #ab3bf5;
+    background-image: linear-gradient(to top, #1f1f28 40%, rgb(36, 36, 45) 100%);
+  }
+  .item-menu.active.coloractive{
+    color: #ab3bf5;
+    background-image: linear-gradient(to top, #1f1f28 40%, rgb(36, 36, 45) 100%);
+  }
+  .item-menu{
+    width: 95%;
+    height: 40px;
+    margin-top: 4px;
+    color: #5C607E;
+    overflow: hidden;
+  /*  */
+    display: flex;
+    
+    align-items: center;
+    border-radius: 5px;
+    
+  }
+  .item-menu.active{
+    width: 95%;
+    height: 40px;
+    margin-top: 4px;
+    color: #7e83ad;
+    overflow: hidden;
+  /*  */
+    display: flex;
+    
+    align-items: center;
+    border-radius: 5px;
+    
+  }
+  .item-menu:hover{
+    color: #ab3bf5;
+    background-image: linear-gradient(to top, #1f1f28 40%, rgb(36, 36, 45) 100%);
+    cursor: pointer;
+  }
+  .item-menu p{
+    font-size: 12px;
+    margin-top: 15px;
+    visibility: hidden;
+    
+  }
+  .item-menu.active p{
+    font-size: 14px;
+    margin-top: 0px;
+    visibility: visible;
+    
+    
+  }
+  .item-menu i{
+    margin-left: 14px;
+    margin-right: 10px;
+  }
+  
+  

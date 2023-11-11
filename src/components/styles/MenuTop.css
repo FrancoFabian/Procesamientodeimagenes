@@ -1,0 +1,138 @@
+.menu-top{
+    /* position: fixed; */
+    display: flex;
+    align-items: center;
+    
+    /* z-index: 14;  */   
+    width: 100%;
+    height: 10vh;
+    background-image: linear-gradient(to top, #0d031c 40%,  #16171e 100%);
+    border-bottom: 1px solid #43465e ;
+    
+}
+.logo{
+    width: 50px;
+    margin-left: 40px;
+}
+.img-logo{
+    width: 50px;
+}
+.p-logo{
+    margin-left: 30px;
+    font-size: 20px;
+    width: 50%;
+    height: 100%;
+    color: aliceblue;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 10px;
+}
+.open-file{
+    margin-left: 10%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 2%;
+    font-size: 15px;
+    color: #8381db;
+    width: 100px;
+    height: 60%;
+    border-radius: 5px;
+    background-image: linear-gradient(to top, #171721  30%,  #150034 100%);
+    border: 1px solid #4700ab;
+
+}
+.save-file{
+    display: flex;
+    justify-content: center;
+    padding-top: 2%;
+    font-size: 15px;
+    color: #8381db;
+    width: 100px;
+    height: 60%;
+    border-radius: 5px;
+    background-image: linear-gradient(to top, #171721  30%,  #150034 100%);
+    border: 1px solid #4700ab;
+    margin-left: 20px;
+}
+.open-file:hover,.save-file:hover{
+    cursor: pointer;
+}
+.open-file p,.save-file p{
+    margin-right: 5px;
+    margin-bottom: 20px;
+}
+.open-file i,.save-file i{
+    margin-top: 2px;
+}
+/*SUBMODALLOGO*/
+.Open-fixed{
+    visibility: hidden;
+    margin-top: 440px;
+    width: auto;
+    height: auto;
+    position: fixed;
+    z-index: 20;
+    
+    box-shadow:0px 0px 3px 0px rgba(71, 0, 171, 0.735);
+
+}
+.Open-fixed.modal{
+    
+    transition: all 0.6s ease;
+    visibility: visible;
+
+}
+.Open-arch{
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 20px;
+   justify-content: center;
+    width: 200px;
+    height: auto;
+    padding-bottom: 40px;
+    background-image: linear-gradient(to top, #111118  30%,  #0e0122 100%);
+    color: #8381db;
+}
+.Open-arch h6{
+    font-size: 14px;
+}
+
+input[type="file"]{
+    
+    display: none;
+    
+  }
+  .coaa{
+    width: 190px;
+    height: 40px;
+   
+    color: #8381db;
+    margin-top: 20px;
+    display: flex;
+    border-radius: 5px;
+    align-items: center;
+    
+    font-size: 12px;
+    font-weight: bolder;
+    cursor: pointer;
+  }
+  .coaa:hover{
+    color: #8381db;
+    background-image: linear-gradient(to right,  #1c1c25  20%,  #1a1822 100%);
+}
+  .coaa i{
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 16px;
+  }
+.flex {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+  
+/*FIN MENU LOGO===========================*/

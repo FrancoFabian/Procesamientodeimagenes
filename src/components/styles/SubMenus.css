@@ -1,0 +1,287 @@
+.sub-menus{
+    box-sizing: border-box;
+    position: fixed;
+    margin-left: 60px;
+    z-index: 12;
+    width: 240px;
+    height: 90vh;
+    background-image: linear-gradient(to top, #0d031c 2%,  #16171e 100%);
+    border-right:1px solid #43465e;
+    padding-top: 20px;
+    padding-left: 2px;
+    padding-right:1px;
+    transform: translateX(0px);
+    transition: all 0.2s ease;
+    overflow-y: scroll;
+   scrollbar-width: thin;
+    padding-bottom: 10px;
+}
+.sub-menus::-webkit-scrollbar{
+    width: 7px;
+    background-image: linear-gradient(to top, #0d031c 2%,  #16171e 100%);
+}
+.sub-menus::-webkit-scrollbar-thumb{
+    border-radius: 20px;
+    cursor: pointer;
+    background-image: linear-gradient(120deg, #d393fb 0%, #9e57f5 100%);
+}
+.sub-menus.despliceX{
+    transition: all 0.6s ease;
+    transform: translateX(-240px);
+}
+.sub-menus.despliceX.despliceXpos{
+    transition: all 0.6s ease;
+    transform: translateX(2px);
+}
+.sub-menus.inactive{
+    visibility: hidden;
+}
+/*FILTROS QUE YA NO TIENEN SUBMENUS O NO SON EDITABLES*/
+.fill-fire{
+    width: 100%;
+    height: 180px;
+    transition: height 1.5s ease;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow: hidden;
+}
+.fill-fire.active{
+    
+    height: auto;
+}
+.fill-fire.active.R{
+    height: 0px;
+}
+.fill-fire.R{
+    height: 0px;
+}
+.fill-fire canvas{
+   
+    width: 200px;
+    height: 150px;
+    background-color: #16171f;
+    
+}
+.mark-fire{
+    
+    cursor: pointer;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 200px;
+    height: auto;
+    background-image: linear-gradient(-225deg, #FF057C 0%, #8D0B93 50%, #321575 100%);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin-bottom: 10px;
+    color: #a578f9;
+    font-size: 13px;
+font-weight: bolder;
+}
+.mark-fire:hover{
+    color: #070609;
+    background-image: linear-gradient(-225deg, #FF057C 0%, #7C64D5 48%, #4CC3FF 100%);
+}
+.see-plus{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+  color: #4CC3FF;
+    width: 100%;
+    height: 40px;
+    margin-bottom: 10px;
+    
+}
+.see-plus:hover{
+    color: #8D0B93;
+    .bar{
+        background-image: linear-gradient(-225deg, #FF057C 0%, #8D0B93 50%, #321575 100%);
+    }
+}
+.see-plus.inactive{
+    overflow: hidden;
+    height: 0px;
+    margin-bottom: 0px;
+    .mark-fire{
+        margin-bottom: 0px;
+    }
+}
+.bar{
+    margin-top: 10px;
+    margin-left: 14px;
+    margin-right: 4px;
+    width: 65%;
+    height: 2px;
+    background-image: linear-gradient(-225deg, #FF057C 0%, #7C64D5 48%, #4CC3FF 100%);
+}
+.select-plus{
+    cursor: pointer;
+}
+/* FILTROS CON AJUSTES*/
+.fire-settings{
+    margin-left: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    width: 95%;
+    height: 50px;
+    background-image: linear-gradient(135deg, #0f2172 0%, #340564 100%);
+    border-radius: 4px;
+    color: #64c8d5;
+    cursor: pointer;
+    overflow: hidden;
+}
+.fire-settings:hover{
+    background-image: linear-gradient(to top, #1e1381 0%, #59098a 100%);
+   
+}
+.fire-settings.active{
+    background-image: linear-gradient(135deg, #0f217200 0%, #34056400 100%);
+    height: 100%;
+    cursor:context-menu;
+    align-content:flex-start;
+    font-size: 18px;
+    color: #fff;
+}
+/*SLIDERS AJUSTOS*/
+.Action{
+    margin-top: 30px;
+    display: none; /*AQUI LE CAMBIAMOS A FLEX EN EL TSX*/
+    flex-wrap: wrap;
+    
+    padding-top: 20px;
+    width: 98%;
+    height: auto;
+    border-radius: 5px;
+    border:1px solid #43465e;
+    background-image: linear-gradient(60deg, #13171c 0%, #031529 100%);
+    overflow: hidden;
+}
+.Action.active{
+    display: flex;
+}
+.ValorGamma{
+    border-radius: 2px;
+    margin-left: 50%;
+    margin-bottom: 15px;
+    text-align: center;
+    color: rgb(195, 237, 237);
+    width: 20%;
+    height: 24px;
+    background-color:transparent;
+    border: 1px solid rgb(100, 107, 126);
+    outline: none;
+    -moz-appearance: textfield;
+
+ }
+ .ValorGamma::-webkit-outer-spin-button,
+.ValorGamma::-webkit-inner-spin-button
+{
+ -webkit-appearance: none;
+}
+
+.main2{
+    margin-bottom: 10px;
+    margin-left: 6px;
+    display: flex;
+    align-items: center;
+    width: auto;
+    height: 25px;
+    overflow: hidden;
+    
+}
+.range2{
+    
+    width: 200px;
+    height: 2px;
+    background-color:transparent;
+    appearance: none;
+    outline: none;
+    position: absolute;
+    z-index: 5;
+}
+.range2::-webkit-slider-thumb{
+    
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: #242631;
+    border-radius: 50%;
+    border: 2px solid rgb(48, 156, 245);
+    cursor: pointer;
+    
+    
+}
+.selector2{
+   width:0px;/*Aqui puedes jugar dependiendo*/
+    height: 2px;
+    z-index: 2;
+   position: absolute;
+   background: linear-gradient(103deg, rgb(148, 77, 255) 0%, rgb(17, 207, 241) 100%);
+
+    border-radius: 2px;
+}
+.fondo2{
+    border-radius: 2px;
+    width: 200px;
+    height: 2px;
+    background-color: #393d4c;
+}
+.Action p{
+    color: rgb(193, 206, 239);
+    font-size: 14px;
+    margin-bottom:15px;
+    margin-left: 5px;
+}
+
+.Actions-CA{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    
+    width: 100%;
+    height: 70px;
+}
+.Bca{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 47%;
+    height: 40px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 5px
+    
+}
+.Bca.cancel{
+  
+    font-weight: bolder;
+    background-image: linear-gradient(60deg, #252c35 0%, #062447 100%);
+  }
+.Bca.cancel:hover{
+    background-image: linear-gradient(60deg, #38424f 0%, #0d396c 100%);
+
+}
+.Bca.apli{
+    
+    margin-right: 5px;
+    background: linear-gradient(103deg, rgba(238,77,255,1) 0%, rgb(17, 207, 241) 100%);
+}
+.Bca.apli:hover{
+    background: linear-gradient(103deg, rgb(17, 207, 241)  0%,  rgba(238,77,255,1) 100%);
+    
+}
+#Apli p{
+    margin-bottom: 0;
+    margin-left: 0;
+    font-weight: bolder;
+    color: #000;
+}
+#cancel p{
+    margin-bottom: 0;
+    margin-left: 0;
+    
+}
