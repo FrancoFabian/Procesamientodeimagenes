@@ -2,8 +2,8 @@
     /* position: fixed; */
     display: flex;
     align-items: center;
-    
-    /* z-index: 14;  */   
+    position: absolute;
+     z-index: 14;     
     width: 100%;
     height: 10vh;
     background-image: linear-gradient(to top, #0d031c 40%,  #16171e 100%);
@@ -73,7 +73,7 @@
     width: auto;
     height: auto;
     position: fixed;
-    z-index: 20;
+    z-index: 120;
     
     box-shadow:0px 0px 3px 0px rgba(71, 0, 171, 0.735);
 

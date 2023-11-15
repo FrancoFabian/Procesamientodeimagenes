@@ -1,6 +1,6 @@
 .side-menu{
     overflow: hidden;
-    
+    margin-top: 10vh;
     position: fixed;
     z-index: 13;
     background: #16171e;

@@ -1,0 +1,70 @@
+.loading-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.atom-icon {
+  font-size: 2rem;
+}
+
+.electron {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: red;
+  animation: orbit 2s linear infinite, colorChange 6s linear infinite;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.75);
+}
+
+.electron-red {
+  transform: rotate(0deg) translateX(50px) rotate(0deg);
+  animation-delay: 0s, 0s; /* Sin retraso */
+}
+
+.electron-green {
+  transform: rotate(120deg) translateX(50px) rotate(-120deg);
+  animation-delay: 0s, -2s; /* Retraso para que comience en un ángulo de 120 grados y con el cambio de color desfasado */
+}
+
+.electron-blue {
+  transform: rotate(240deg) translateX(50px) rotate(-240deg);
+  animation-delay: 0s, -4s; /* Retraso para que comience en un ángulo de 240 grados y con el cambio de color desfasado */
+}
+
+@keyframes orbit {
+  0% {
+    transform: rotate(0deg) translateX(50px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg) translateX(50px) rotate(-360deg);
+  }
+}
+
+
+@keyframes colorChange {
+  0%, 100% {
+      background-color: red;
+  }
+  33% {
+      background-color: green;
+  }
+  66% {
+      background-color: blue;
+  }
+}
+
+.loading-overlay {
+  position: absolute;
+  z-index: 234;
+  width: 23.5%;
+  background-color: #000;
+  color: aliceblue;
+  height: 90vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
