@@ -6,7 +6,9 @@
     background-image: linear-gradient(to top, #14141b 40%, #0d031c 100%);
     position: fixed;
     transform: translateX(30.9%);
-     
-  
+     display: flex;
+     justify-content: center;
+     align-items: center;
+  overflow: hidden;
     
 }

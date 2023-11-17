@@ -1,4 +1,4 @@
-import React,{useRef,useState,useContext} from "react";
+import React,{useRef,useContext} from "react";
 import './styles/MenuTop.css';
 import Svglarge from "./img/Svglarge";
 import { ModalContext } from "./context/ModalProvider";
@@ -8,7 +8,20 @@ const MenuTop: React.FC = () => {
     if (!modalContext) {
       throw new Error("Component must be wrapped within a ModalProvider");
     }
-    const { isOpen, setIsOpen } = modalContext;
+    const { isOpen, setIsOpen,setImage } = modalContext;
+    function handleImageChange (event: React.ChangeEvent<HTMLInputElement>)  {
+      const file = event.target.files ? event.target.files[0] : null;
+      if (file) {
+        if (modalContext?.image) {
+          URL.revokeObjectURL(modalContext.image);
+        }
+        const imageUrl = URL.createObjectURL(file);
+        setImage(imageUrl);
+         // Actualizamos el contexto con la URL de la imagen
+         console.log(file);
+      }
+    }
+  
     return(
         <div className="menu-top" id="menu-top">
              <div className="logo">
@@ -33,7 +46,10 @@ const MenuTop: React.FC = () => {
           <div ref={miRef} className={`Open-fixed${isOpen ? "modal" : " "}`} id="Open-fixed" >
             <div className="Open-arch">
               <h6>Nueva imagen</h6>
-              <input type="file" name="file" id="file" accept="image/*" />
+              <input type="file" name="file" id="file" accept="image/*" 
+                onChange={handleImageChange}
+                
+              />
               <label className="coaa" htmlFor="file">
                 <i className="bi bi-pc-display-horizontal"></i> De este Dispositivo
               </label>

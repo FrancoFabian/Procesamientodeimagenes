@@ -1,19 +1,23 @@
-import React from 'react';
+import React, { useState, createContext, Dispatch, SetStateAction, ReactNode } from 'react';
 
-interface ModalContextProps {
+export interface ModalContextProps {
   isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  image: string | null;
+  setImage: Dispatch<SetStateAction<string | null>>;
 }
 
-export const ModalContext = React.createContext<ModalContextProps | undefined>(undefined);
+export const ModalContext = createContext<ModalContextProps | undefined>(undefined);
 
-export const ModalProvider = ({ children }: { children?: React.ReactNode }) => {
-    const [isOpen, setIsOpen] = React.useState(false);
-  
-    return (
-      <ModalContext.Provider value={{ isOpen, setIsOpen }}>
-        {children}
-      </ModalContext.Provider>
-    );
-  };
-  
+interface ModalProviderProps {
+  children: ReactNode; // Aquí está el tipo para children
+}
+
+export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [image, setImage] = useState<string | null>(null);
+
+  const value = { isOpen, setIsOpen, image, setImage };
+
+  return <ModalContext.Provider value={value}>{children}</ModalContext.Provider>;
+};
