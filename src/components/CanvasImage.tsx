@@ -39,13 +39,6 @@ class CanvasImage extends Component<CanvasImageProps, CanvasComponentState> {
     this.prevImage = this.context!.image;
   }
 
- /* componentDidUpdate(prevProps: CanvasImageProps) {
-    if (prevProps.dimensions.width !== this.props.dimensions.width || 
-        prevProps.dimensions.height !== this.props.dimensions.height) {
-      this.setState({ dimensions: this.props.dimensions });
-      this.updateCanvasDimensions(this.context!.image);
-    }
-  }*/
   componentDidUpdate() {
     const { image } = this.context!;
     const dimensionsChanged = this.props.dimensions.width !== this.state.dimensions.width ||
