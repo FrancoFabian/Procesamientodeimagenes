@@ -1,11 +1,11 @@
 .sub-menus{
-    margin-top: 10vh;
+    margin-top: 8vh;
     box-sizing: border-box;
     position: fixed;
     margin-left: 60px;
     z-index: 12;
     width: 240px;
-    height: 90vh;
+    height: 92vh;
     background-image: linear-gradient(to top, #0d031c 2%,  #16171e 100%);
     border-right:1px solid #43465e;
     padding-top: 20px;
@@ -18,7 +18,8 @@
     padding-bottom: 10px;
 }
 .sub-menus::-webkit-scrollbar{
-    width: 7px;
+    
+    width: 5px;
     background-image: linear-gradient(to top, #0d031c 2%,  #16171e 100%);
 }
 .sub-menus::-webkit-scrollbar-thumb{
@@ -40,12 +41,13 @@
 /*FILTROS QUE YA NO TIENEN SUBMENUS O NO SON EDITABLES*/
 .fill-fire{
     width: 100%;
-    height: 180px;
+    height: 220px;
     transition: height 1.5s ease;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     overflow: hidden;
+    gap:10px;
 }
 .fill-fire.active{
     
@@ -59,8 +61,8 @@
 }
 .fill-fire canvas{
    
-    width: 200px;
-    height: 150px;
+    /*width: 200px;
+    height: 200px;*/
     background-color: #16171f;
     
 }
@@ -80,6 +82,7 @@
     font-size: 13px;
 font-weight: bolder;
 }
+
 .mark-fire:hover{
     color: #070609;
     background-image: linear-gradient(-225deg, #FF057C 0%, #7C64D5 48%, #4CC3FF 100%);
@@ -121,6 +124,7 @@ font-weight: bolder;
 }
 /* FILTROS CON AJUSTES*/
 .fire-settings{
+    margin-top: 4px;
     margin-left: 5px;
     display: flex;
     flex-wrap: wrap;
@@ -128,14 +132,17 @@ font-weight: bolder;
     align-content: center;
     width: 95%;
     height: 50px;
-    background-image: linear-gradient(135deg, #0f2172 0%, #340564 100%);
+    background-image: linear-gradient(135deg, #131624 0%, #1f1728 100%);
     border-radius: 4px;
     color: #64c8d5;
     cursor: pointer;
     overflow: hidden;
 }
+.fire-settings.ocultar{
+    display: none;
+}
 .fire-settings:hover{
-    background-image: linear-gradient(to top, #1e1381 0%, #59098a 100%);
+    background-image: linear-gradient(to top, #1f1d3a 0%, #300349 100%);
    
 }
 .fire-settings.active{
@@ -162,6 +169,9 @@ font-weight: bolder;
 }
 .Action.active{
     display: flex;
+}
+.Action.ocultar{
+    display: none;
 }
 .ValorGamma{
     border-radius: 2px;

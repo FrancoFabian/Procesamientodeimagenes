@@ -5,7 +5,7 @@
     position: absolute;
      z-index: 14;     
     width: 100%;
-    height: 10vh;
+    height: 8vh;
     background-image: linear-gradient(to top, #0d031c 40%,  #16171e 100%);
     border-bottom: 1px solid #43465e ;
     
@@ -33,11 +33,11 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding-top: 2%;
+    padding-top: 11px;
     font-size: 15px;
     color: #8381db;
     width: 100px;
-    height: 60%;
+    height: 50%;
     border-radius: 5px;
     background-image: linear-gradient(to top, #171721  30%,  #150034 100%);
     border: 1px solid #4700ab;
@@ -46,11 +46,11 @@
 .save-file{
     display: flex;
     justify-content: center;
-    padding-top: 2%;
+    padding-top: 11px;
     font-size: 15px;
     color: #8381db;
     width: 100px;
-    height: 60%;
+    height: 50%;
     border-radius: 5px;
     background-image: linear-gradient(to top, #171721  30%,  #150034 100%);
     border: 1px solid #4700ab;

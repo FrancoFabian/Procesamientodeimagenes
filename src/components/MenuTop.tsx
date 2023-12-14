@@ -9,18 +9,13 @@ const MenuTop: React.FC = () => {
       throw new Error("Component must be wrapped within a ModalProvider");
     }
     const { isOpen, setIsOpen,setImage } = modalContext;
-    function handleImageChange (event: React.ChangeEvent<HTMLInputElement>)  {
+    function handleImageChange(event: React.ChangeEvent<HTMLInputElement>) {
       const file = event.target.files ? event.target.files[0] : null;
       if (file) {
-        if (modalContext?.image) {
-          URL.revokeObjectURL(modalContext.image);
-        }
-        const imageUrl = URL.createObjectURL(file);
-        setImage(imageUrl);
-         // Actualizamos el contexto con la URL de la imagen
-         console.log(file);
+        setImage(file); // Guardar el objeto File directamente
       }
     }
+    
   
     return(
         <div className="menu-top" id="menu-top">

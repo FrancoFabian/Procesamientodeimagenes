@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './styles/MenuCanvas.css';
 
 const MenuCanvas: React.FC = () => {
-  const [sliderValue, setSliderValue] = useState<number>(200);
+  const [sliderValue, setSliderValue] = useState<number>(100);
   const maxSliderValue = 400; // Define el máximo valor para el slider
   const maxWidth = 300; // El máximo ancho que #selector puede tener
   const [origin,setOrigin] = useState<boolean>(true);

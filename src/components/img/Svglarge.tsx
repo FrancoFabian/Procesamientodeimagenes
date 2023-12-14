@@ -2,7 +2,7 @@ import React from 'react';
 
 const Svglarge= () => (
     <svg id='Sd' version="1.0" xmlns="http://www.w3.org/2000/svg"
-    width="38.000000pt" height="38.000000pt" viewBox="0 0 225.000000 225.000000"
+    width="30.000000pt" height="30.000000pt" viewBox="0 0 225.000000 225.000000"
     preserveAspectRatio="xMidYMid meet">
          <defs>
     <linearGradient id="0" x1="0" y1="0.5" x2="1" y2="0.5">

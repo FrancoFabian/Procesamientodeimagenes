@@ -1,11 +1,11 @@
 .ContenedorCnavas{
-    margin-top: 10vh;
-    width: 76.2%;
-    height: 79.8vh;
-    background-color: brown;
-  /* background: #16171e;
+    margin-top: 8vh;
+    width: 76.3%;
+    height: 83.8vh;
+   
+   background: #16171e;
     background-image: linear-gradient(to top, #14141b 40%, #0d031c 100%);
-   */
+   
     position: fixed;
     transform: translateX(30.9%);
      display: flex;

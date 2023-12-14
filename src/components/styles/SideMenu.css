@@ -1,12 +1,12 @@
 .side-menu{
     overflow: hidden;
-    margin-top: 10vh;
+    margin-top: 8vh;
     position: fixed;
     z-index: 13;
     background: #16171e;
     background-image: linear-gradient(to top, #14141b 40%, #120426 100%);
     width: 60px;
-    height:90vh;
+    height:92vh;
     box-sizing: border-box;
     padding-top: 30px ;
     padding-left: 7px;

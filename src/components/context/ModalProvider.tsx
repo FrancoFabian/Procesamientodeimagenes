@@ -3,10 +3,9 @@ import React, { useState, createContext, Dispatch, SetStateAction, ReactNode } f
 export interface ModalContextProps {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-  image: string | null;
-  setImage: Dispatch<SetStateAction<string | null>>;
+  image: File | null;
+  setImage: Dispatch<SetStateAction<File | null>>;
 }
-
 export const ModalContext = createContext<ModalContextProps | undefined>(undefined);
 
 interface ModalProviderProps {
@@ -15,7 +14,7 @@ interface ModalProviderProps {
 
 export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [image, setImage] = useState<string | null>(null);
+  const [image, setImage] = useState<File | null>(null);
 
   const value = { isOpen, setIsOpen, image, setImage };
 
