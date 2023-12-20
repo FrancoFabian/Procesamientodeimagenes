@@ -146,6 +146,7 @@ export class ImageType {
   }
 
   public getArrayImg():number[][][]  {
+     
     return this.arrImage;
   }
 

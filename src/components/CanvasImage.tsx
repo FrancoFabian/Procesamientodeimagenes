@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ModalContext } from './context/ModalProvider';
-
+import { ImageType } from "./filters/ImageType";
 interface CanvasComponentState {
   dimensions: {
     width: number;
@@ -15,12 +15,14 @@ interface CanvasImageProps {
   };
 }
 
+
 class CanvasImage extends Component<CanvasImageProps, CanvasComponentState> {
   static contextType = ModalContext;
   private prevImage: File | null = null;
   declare context: React.ContextType<typeof ModalContext>;
-
+  private prevSelectedFilter: Function | null = null; // Nueva propiedad privada
   private canvasRef: React.RefObject<HTMLCanvasElement>;
+  private originalImage: HTMLImageElement | null = null
 
   constructor(props: CanvasImageProps) {
     super(props);
@@ -32,87 +34,33 @@ class CanvasImage extends Component<CanvasImageProps, CanvasComponentState> {
       }
     };
   }
-
   componentDidMount() {
     this.prevImage = this.context!.image;
-    this.resetCanvasSize();
+    //this.resetCanvasSize();
+    this.loadOriginalImage();
   }
 
   componentDidUpdate() {
-    const { image } = this.context!;
-    
-    if (image !== this.prevImage) {
-      this.resetCanvasSize();
-      this.prevImage = image;
-    }
+  const { image, selectedFilter ,isSettings} = this.context!;
+   console.log(selectedFilter+"FILTROOOOOOO")
+  // Verifica si la imagen ha cambiado
+  if (image !== this.prevImage) {
+   // this.resetCanvasSize();
+   this.loadOriginalImage();
+    this.prevImage = image;
   }
-  
 
-  
-  // ... tus importaciones y setup ...
-
- /*resetCanvasSize = async () => {
-  const { image } = this.context!;
-  if (image instanceof Blob) {
-      const img = new Image();
-      img.onload = async () => {
-          const maxWidth = this.props.dimensions.width - 10;
-          const maxHeight = this.props.dimensions.height - 10;
-          const canvasAspectRatio = maxWidth / maxHeight;
-          const imgAspectRatio = img.width / img.height;
-          let newWidth:number, newHeight:number;
-
-          if (imgAspectRatio > canvasAspectRatio) {
-              newWidth = maxWidth;
-              newHeight = maxWidth / imgAspectRatio;
-          } else {
-              newHeight = maxHeight;
-              newWidth = maxHeight * imgAspectRatio;
-          }
-
-          this.setState({ dimensions: { width: newWidth, height: newHeight } }, async () => {
-              const formData = new FormData();
-              formData.append('width', newWidth.toString());
-              formData.append('height', newHeight.toString());
-              formData.append('file', image);
-
-              const response = await fetch('http://127.0.0.1:8000/api/imageRedimensionation', {
-                  method: 'POST',
-                  body: formData,
-              });
-
-              const blob = await response.blob();
-              const objectURL = URL.createObjectURL(blob);
-
-              const resizedImage = new Image();
-              resizedImage.onload = () => {
-                  const canvas = this.canvasRef.current;
-                  console.log("imgWIDTH"+resizedImage.width+"imgHEIGHT:"+resizedImage.height)
-                  if (canvas) {
-                      canvas.width = resizedImage.width;
-                      canvas.height = resizedImage.height;
-                      console.log("WIDTH"+canvas.width+" heigth: w"+canvas.height)
-                      const ctx = canvas.getContext('2d');
-                      if (ctx) {
-                          ctx.imageSmoothingEnabled = true;
-                          ctx.imageSmoothingQuality = 'high';  // Utilizar calidad alta para el escalado
-                          ctx.clearRect(0, 0, resizedImage.width, resizedImage.height);
-                          ctx.drawImage(resizedImage, 0, 0, resizedImage.width, resizedImage.height);
-                      }
-                  }
-                  URL.revokeObjectURL(objectURL);
-              };
-              resizedImage.src = objectURL;
-          });
-      };
-      img.src = URL.createObjectURL(image);
-  } else {
-      console.error("La imagen proporcionada no es un Blob o File");
+  // Verifica si el filtro seleccionado ha cambiado
+  if (selectedFilter && this.prevSelectedFilter !== selectedFilter) {
+    console.log("ANTES DE APLICAR EL FILTRO")
+    console.log(isSettings)
+    console.log(selectedFilter+"FILTROOOOOOO2222222")
+    this.applyFilter(selectedFilter);
+    this.prevSelectedFilter = selectedFilter; // Actualiza prevSelectedFilter
   }
-};*/
+}
 
-
-resetCanvasSize = async () => {
+resetCanvasSize =  () => {
   const { image } = this.context!;
   if (image instanceof Blob) {
     const img = new Image();
@@ -140,7 +88,7 @@ resetCanvasSize = async () => {
           canvas.width = newWidth;
           canvas.height = newHeight;
           console.log("WIDTH: "+canvas.width+" HEIGHT : "+canvas.height)
-          const ctx = canvas.getContext('2d');
+          const ctx = canvas.getContext('2d',{ willReadFrequently: true });
           if (ctx) {
             ctx.imageSmoothingEnabled = true;
             ctx.imageSmoothingQuality = 'high'; // Asegurarse de que la calidad de la imagen sea alta
@@ -155,6 +103,48 @@ resetCanvasSize = async () => {
     console.error("La imagen proporcionada no es un Blob o File");
   }
 };
+loadOriginalImage = () => {
+  const { image } = this.context!;
+  if (image instanceof Blob) {
+    const img = new Image();
+    img.onload = () => {
+      this.originalImage = img;
+      this.resetCanvasSize();
+    };
+    img.src = URL.createObjectURL(image);
+  }
+};
+
+
+applyFilter = (filterFunction: Function) => {
+  const canvas = this.canvasRef.current;
+  const { gammaValues,isSettings } = this.context!; // Obtener los valores de Gamma del contexto
+
+  if (canvas && this.originalImage) {
+    const ctx = canvas.getContext('2d',{ willReadFrequently: true });
+    if (ctx) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(this.originalImage, 0, 0, canvas.width, canvas.height);
+      if (typeof filterFunction !== 'function') {
+        console.error("El filtro proporcionado no es una función válida.");
+        return;
+      }
+      
+      // Crear una instancia de ImageType con la imagen original
+      const imageType = new ImageType(ctx, this.originalImage, canvas.width, canvas.height);
+      var filteredImage;
+      if(isSettings === false){
+         filteredImage = filterFunction(imageType);
+      }else{
+         filteredImage = filterFunction(imageType,gammaValues);
+      }
+      //
+      
+      imageType.imageArray2DtoData(ctx, filteredImage);
+    }
+  }
+};
+
 
 
   render() {

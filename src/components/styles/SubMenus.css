@@ -39,6 +39,7 @@
     visibility: hidden;
 }
 /*FILTROS QUE YA NO TIENEN SUBMENUS O NO SON EDITABLES*/
+/*
 .fill-fire{
     width: 100%;
     height: 220px;
@@ -62,7 +63,7 @@
 .fill-fire canvas{
    
     /*width: 200px;
-    height: 200px;*/
+    height: 200px;
     background-color: #16171f;
     
 }
@@ -87,6 +88,7 @@ font-weight: bolder;
     color: #070609;
     background-image: linear-gradient(-225deg, #FF057C 0%, #7C64D5 48%, #4CC3FF 100%);
 }
+*/
 .see-plus{
     display: flex;
     flex-wrap: wrap;
@@ -173,13 +175,28 @@ font-weight: bolder;
 .Action.ocultar{
     display: none;
 }
+.retion{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.retionuno{
+    width: 70%;
+    height: 60%;
+    display: flex;
+    padding-left: 10px;
+}
+.retiondos{
+    display: flex;
+    width: 30%;
+    justify-content: center;
+}
 .ValorGamma{
     border-radius: 2px;
-    margin-left: 50%;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     text-align: center;
     color: rgb(195, 237, 237);
-    width: 20%;
+    width: 70%;
     height: 24px;
     background-color:transparent;
     border: 1px solid rgb(100, 107, 126);

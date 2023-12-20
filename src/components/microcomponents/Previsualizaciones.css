@@ -1,0 +1,50 @@
+
+/*FILTROS QUE YA NO TIENEN SUBMENUS O NO SON EDITABLES*/
+.fill-fire{
+    width: 100%;
+    height: 220px;
+    transition: height 1.5s ease;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow: hidden;
+    gap:10px;
+}
+.fill-fire.active{
+    
+    height: auto;
+}
+.fill-fire.active.R{
+    height: 0px;
+}
+.fill-fire.R{
+    height: 0px;
+}
+.fill-fire canvas{
+   
+    /*width: 200px;
+    height: 200px;*/
+    background-color: #16171f;
+    
+}
+.mark-fire{
+    
+    cursor: pointer;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 200px;
+    height: auto;
+    background-image: linear-gradient(-225deg, #FF057C 0%, #8D0B93 50%, #321575 100%);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin-bottom: 10px;
+    color: #a578f9;
+    font-size: 13px;
+font-weight: bolder;
+}
+
+.mark-fire:hover{
+    color: #070609;
+    background-image: linear-gradient(-225deg, #FF057C 0%, #7C64D5 48%, #4CC3FF 100%);
+}

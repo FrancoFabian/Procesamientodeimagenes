@@ -75,7 +75,7 @@
     position: fixed;
     z-index: 120;
     
-    box-shadow:0px 0px 3px 0px rgba(71, 0, 171, 0.735);
+    box-shadow:0px 0px 3px 0px rgba(126, 62, 215, 0.845);
 
 }
 .Open-fixed.modal{
@@ -92,7 +92,7 @@
     width: 200px;
     height: auto;
     padding-bottom: 40px;
-    background-image: linear-gradient(to top, #111118  30%,  #0e0122 100%);
+    background-image: linear-gradient(to top, #1b1b25  30%,  #1b1428 100%);
     color: #8381db;
 }
 .Open-arch h6{
@@ -119,8 +119,9 @@ input[type="file"]{
     cursor: pointer;
   }
   .coaa:hover{
-    color: #8381db;
-    background-image: linear-gradient(to right,  #1c1c25  20%,  #1a1822 100%);
+    box-shadow:0px 0px 3px 0px rgba(74, 51, 164, 0.845) ;
+    color: #81d1db;
+    background-image: linear-gradient(to right,  #191931  20%,  #1f1e23 100%);
 }
   .coaa i{
     margin-left: 10px;

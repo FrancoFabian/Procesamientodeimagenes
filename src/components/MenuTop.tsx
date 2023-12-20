@@ -13,6 +13,7 @@ const MenuTop: React.FC = () => {
       const file = event.target.files ? event.target.files[0] : null;
       if (file) {
         setImage(file); // Guardar el objeto File directamente
+        setIsOpen(false);
       }
     }
     
