@@ -4,6 +4,9 @@ import './styles/SubMenus.css'
 import { optionsObject } from "./model/OptionsFilter";
 import Previsualizaciones from "./microcomponents/Previsualizaciones";
 import Settings from "./microcomponents/Settings";
+import SettingsEdition from "./microcomponents/SettingsEdition";
+import SettingsHyper from "./microcomponents/SettingsHyper";
+import SettingsImage from "./microcomponents/SettingsImage";
 //import { ImageType } from "./filters/ImageType";
 //import TamRenderCanvas from "./model/TamRenderCanvas";
 const SubMenus: React.FC = () => {
@@ -33,6 +36,7 @@ const SubMenus: React.FC = () => {
             
           </div>  
           <Previsualizaciones/>
+          
         <div className="see-plus" id="sums" onClick={()=>{
               document.getElementById("minus")?.classList.remove("inactive");
               document.getElementById("sums")?.classList.add("inactive");
@@ -45,7 +49,10 @@ const SubMenus: React.FC = () => {
             </div>
             
           </div>  
-          <Settings/>
+          
+         <Settings/>
+        <SettingsEdition/>
+        <SettingsImage/>
           
       </div>
       

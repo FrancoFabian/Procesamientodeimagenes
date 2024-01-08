@@ -8,7 +8,7 @@ const SideMenu: React.FC = () => {
   if (!modalContext) {
     throw new Error("Component must be wrapped within a ModalProvider");
   }
-  const { isOpen, setIsOpen } = modalContext;
+  
   
   
   const arrOptions: {nombre:String; icon:String}[]= [
@@ -66,17 +66,24 @@ const SideMenu: React.FC = () => {
     onMouseEnter={()=>abrirSidemenu(Who)} 
     onMouseLeave={()=>closeSidemenu(Who)}
     onClick={()=>{
-      setIsOpen(false)
+      modalContext.setIsOpen(false);
+    
     }}
     >
       
        {
-        arrOptions.map((areO,i)=>(
+        arrOptions.map((areO,i:number)=>(
           <div 
            id={`item${i}`}
            className={`item-menu`} 
            key={i}
-           onClick={()=> setisStark(i)}
+           onClick={()=> {
+            setisStark(i)
+            modalContext.setOptionsGen(i)
+           }
+            
+            
+          }
            >
             
             <i className={areO.icon.toString()}/>

@@ -1,5 +1,6 @@
 import React,{useState,useEffect,useContext} from "react";
 import { ModalContext } from "../context/ModalProvider";
+import './Settings.css'
 const Settings:React.FC = () =>{
       type GeneralFilterFunction = (...args: any[]) => number[][][];
       const modalContext = useContext(ModalContext);

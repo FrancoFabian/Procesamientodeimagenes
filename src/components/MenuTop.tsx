@@ -4,17 +4,27 @@ import Svglarge from "./img/Svglarge";
 import { ModalContext } from "./context/ModalProvider";
 const MenuTop: React.FC = () => {
     const miRef = useRef<HTMLDivElement>(null);
+    const inputPrincipal = useRef<HTMLInputElement>(null);
     const modalContext = useContext(ModalContext);
     if (!modalContext) {
       throw new Error("Component must be wrapped within a ModalProvider");
     }
     const { isOpen, setIsOpen,setImage } = modalContext;
-    function handleImageChange(event: React.ChangeEvent<HTMLInputElement>) {
-      const file = event.target.files ? event.target.files[0] : null;
-      if (file) {
-        setImage(file); // Guardar el objeto File directamente
-        setIsOpen(false);
-      }
+    function handleImageChange() {
+      const fileInput = inputPrincipal.current;
+       /* const file = event.target.files ? event.target.files[0] : null;
+        if (file) {
+          setImage(file); // Guardar el objeto File directamente
+          setIsOpen(false);
+        }*/
+        if (fileInput && fileInput.files ) {
+          const selectedFile = fileInput.files[0];
+          setImage(selectedFile);
+          setIsOpen(false);
+          
+        }
+      
+     
     }
     
   
@@ -43,8 +53,16 @@ const MenuTop: React.FC = () => {
             <div className="Open-arch">
               <h6>Nueva imagen</h6>
               <input type="file" name="file" id="file" accept="image/*" 
-                onChange={handleImageChange}
+                onChange={()=>{
+                  if(inputPrincipal.current?.files){
+                    setImage(inputPrincipal.current.files[0])
+                    setIsOpen(false)
+                  }
+                 
                 
+                   
+                }}
+                ref={inputPrincipal}
               />
               <label className="coaa" htmlFor="file">
                 <i className="bi bi-pc-display-horizontal"></i> De este Dispositivo

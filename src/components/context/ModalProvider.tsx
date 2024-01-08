@@ -1,4 +1,4 @@
-import React, { useState, createContext, Dispatch, SetStateAction, ReactNode } from 'react';
+import React, { useState,useEffect, createContext, Dispatch, SetStateAction, ReactNode } from 'react';
 import { optionsObject } from '../model/OptionsFilter';
 type GeneralFilterFunction = (...args: any[]) => number[][][];
 
@@ -43,6 +43,10 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
       };
     });
   };
+  useEffect(() => {
+    setOptFilter(optionsObject[optionsGen]);
+  }, [optionsGen]);
+  
 
   const value = {
     isOpen, setIsOpen, 
@@ -54,6 +58,8 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
     optionsGen,setOptionsGen,
     optFilter,setOptFilter
   };
+  console.log("SIDEMENUS : "+optionsGen)
+  console.log(optFilter)
   console.log("backtoORIGINAL"+toBack)
   console.log("EL GAMMMA"+gammaValues)
   console.log("ESTADO EN EL CONTEXTO: " + selectedFilter?.toString());
