@@ -1,5 +1,6 @@
 import React, { useState,useEffect, createContext, Dispatch, SetStateAction, ReactNode } from 'react';
 import { optionsObject } from '../model/OptionsFilter';
+import { OptionObject } from '../model/OptionsFilter';
 type GeneralFilterFunction = (...args: any[]) => number[][][];
 
 export interface ModalContextProps {
@@ -17,8 +18,10 @@ export interface ModalContextProps {
   setToBack: Dispatch<SetStateAction<number>>;
   optionsGen:number;
   setOptionsGen:Dispatch<SetStateAction<number>>;
-  optFilter:any;
-  setOptFilter:Dispatch<SetStateAction<any>>;
+  optFilter:OptionObject;
+  setOptFilter:Dispatch<SetStateAction<OptionObject>>;
+  imgComposite: File | null;
+  setImgComposite: Dispatch<SetStateAction<File | null>>;
 }
 
 export const ModalContext = createContext<ModalContextProps | undefined>(undefined);
@@ -36,6 +39,7 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
   const [toBack,setToBack] = useState(0);
   const [optionsGen,setOptionsGen] = useState(0);
   const [optFilter,setOptFilter] = useState(optionsObject[optionsGen])
+  const [imgComposite,setImgComposite] = useState<File | null>(null);
   const updateSelectedFilter = (newFilterFunction: GeneralFilterFunction) => {
     setSelectedFilter(() => {
       return (...args: any[]) => {
@@ -56,8 +60,10 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
     gammaValues, setGammaValues,
     toBack,setToBack,
     optionsGen,setOptionsGen,
-    optFilter,setOptFilter
+    optFilter,setOptFilter,
+    imgComposite,setImgComposite
   };
+  console.log("IMAGEN PARA FILTRO : "+imgComposite)
   console.log("SIDEMENUS : "+optionsGen)
   console.log(optFilter)
   console.log("backtoORIGINAL"+toBack)

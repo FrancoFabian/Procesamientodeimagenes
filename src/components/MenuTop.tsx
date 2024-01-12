@@ -54,10 +54,7 @@ const MenuTop: React.FC = () => {
               <h6>Nueva imagen</h6>
               <input type="file" name="file" id="file" accept="image/*" 
                 onChange={()=>{
-                  if(inputPrincipal.current?.files){
-                    setImage(inputPrincipal.current.files[0])
-                    setIsOpen(false)
-                  }
+                 handleImageChange()
                  
                 
                    

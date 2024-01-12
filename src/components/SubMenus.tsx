@@ -1,14 +1,11 @@
-import React,{useState,useEffect,useContext} from "react";
+import React,{useContext} from "react";
 import { ModalContext } from "./context/ModalProvider";
 import './styles/SubMenus.css'
-import { optionsObject } from "./model/OptionsFilter";
 import Previsualizaciones from "./microcomponents/Previsualizaciones";
 import Settings from "./microcomponents/Settings";
 import SettingsEdition from "./microcomponents/SettingsEdition";
-import SettingsHyper from "./microcomponents/SettingsHyper";
 import SettingsImage from "./microcomponents/SettingsImage";
-//import { ImageType } from "./filters/ImageType";
-//import TamRenderCanvas from "./model/TamRenderCanvas";
+
 const SubMenus: React.FC = () => {
 
 
@@ -16,14 +13,13 @@ const SubMenus: React.FC = () => {
   if (!modalContext) {
     throw new Error("Component must be wrapped within a ModalProvider");
   }
-  //const [rangeValues, setRangeValues] = useState<Record<string, number>>({});
- // const [rangeValuestwo, setRangeValuesTwo] = useState<Record<string, number>>({});
-  const [optionFilter] = useState(optionsObject[modalContext.optionsGen]);
-  const [tamLenght] = useState(optionFilter.canvasI.length - 1);
+  
+  
+  
  
     return(
         <div className="sub-menus" id="sub-menus" onClick={()=>{}}>
-         <div className="see-plus inactive" id="minus" onClick={()=>{
+        {modalContext.optFilter.canvasI.length > 1 ? <div className="see-plus inactive" id="minus" onClick={()=>{
           document.getElementById("minus")?.classList.add("inactive");
           document.getElementById("sums")?.classList.remove("inactive");
           document.getElementById("FIRE")?.classList.remove("active");
@@ -34,10 +30,10 @@ const SubMenus: React.FC = () => {
             <i className="bi bi-eye"></i>
             </div>
             
-          </div>  
-          <Previsualizaciones/>
+          </div>:null  }
+        { modalContext.optFilter.canvasI.length > 0? <Previsualizaciones/>: null}
           
-        <div className="see-plus" id="sums" onClick={()=>{
+       {modalContext.optFilter.canvasI.length > 1 ? <div className="see-plus" id="sums" onClick={()=>{
               document.getElementById("minus")?.classList.remove("inactive");
               document.getElementById("sums")?.classList.add("inactive");
               document.getElementById("FIRE")?.classList.add("active");
@@ -45,10 +41,10 @@ const SubMenus: React.FC = () => {
             <div className="bar"></div>
             <div className="select-plus">
             <i className="bi bi-eye"></i>
-            <span> {tamLenght}<i className="bi bi-plus"></i></span>
+            <span> {modalContext.optFilter.canvasI.length - 1}<i className="bi bi-plus"></i></span>
             </div>
             
-          </div>  
+          </div> : null }
           
          <Settings/>
         <SettingsEdition/>
