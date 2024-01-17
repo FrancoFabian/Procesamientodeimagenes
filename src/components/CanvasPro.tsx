@@ -15,7 +15,6 @@ const CanvasPro: React.FC = () => {
         setDimensions({ width, height });
       }
     };
-
     updateDimensions();
 
     const resizeObserver = new ResizeObserver(updateDimensions);
@@ -31,11 +30,25 @@ const CanvasPro: React.FC = () => {
       // Este efecto se activa cuando la imagen cambia y las dimensiones son válidas.
     }
   }, [modalContext?.image, dimensions]);
+  useEffect(() => {
+    if (modalContext?.image && modalContext?.zoom) {
+      const img = new Image();
+      img.onload = () => {
+        const newWidth = img.width * (modalContext.zoom / 100);
+        const newHeight = img.height * (modalContext.zoom / 100);
+        setDimensions({ width: newWidth, height: newHeight });
+      };
+      img.src = URL.createObjectURL(modalContext.image);
+    }
+  }, [modalContext?.image, modalContext?.zoom]);
 
   return (
     <div ref={containerRef} className="ContenedorCnavas">
       {dimensions.width > 0 && dimensions.height > 0 && (
-        <CanvasImage dimensions={dimensions} />
+        <CanvasImage dimensions={dimensions}
+        image={modalContext?.image}
+        zoom={modalContext?.zoom}
+        />
       )}
     </div>
   );

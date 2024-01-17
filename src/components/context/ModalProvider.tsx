@@ -22,6 +22,8 @@ export interface ModalContextProps {
   setOptFilter:Dispatch<SetStateAction<OptionObject>>;
   imgComposite: File | null;
   setImgComposite: Dispatch<SetStateAction<File | null>>;
+  zoom:number;
+  setZoom:Dispatch<SetStateAction<number>>;
 }
 
 export const ModalContext = createContext<ModalContextProps | undefined>(undefined);
@@ -40,6 +42,7 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
   const [optionsGen,setOptionsGen] = useState(0);
   const [optFilter,setOptFilter] = useState(optionsObject[optionsGen])
   const [imgComposite,setImgComposite] = useState<File | null>(null);
+  const [zoom,setZoom] = useState(0);
   const updateSelectedFilter = (newFilterFunction: GeneralFilterFunction) => {
     setSelectedFilter(() => {
       return (...args: any[]) => {
@@ -61,7 +64,8 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
     toBack,setToBack,
     optionsGen,setOptionsGen,
     optFilter,setOptFilter,
-    imgComposite,setImgComposite
+    imgComposite,setImgComposite,
+    zoom,setZoom
   };
   console.log("IMAGEN PARA FILTRO : "+imgComposite)
   console.log("SIDEMENUS : "+optionsGen)
@@ -70,5 +74,6 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
   console.log("EL GAMMMA"+gammaValues)
   console.log("ESTADO EN EL CONTEXTO: " + selectedFilter?.toString());
   console.log("SETTINGS"+isSettings)
+  console.log("ZOOMM"+zoom)
   return <ModalContext.Provider value={value}>{children}</ModalContext.Provider>;
 };

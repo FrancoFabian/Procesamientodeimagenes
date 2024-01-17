@@ -1,4 +1,4 @@
-import React,{useRef,useContext} from "react";
+import React,{useRef,useContext,useCallback} from "react";
 import './styles/MenuTop.css';
 import Svglarge from "./img/Svglarge";
 import { ModalContext } from "./context/ModalProvider";
@@ -10,22 +10,15 @@ const MenuTop: React.FC = () => {
       throw new Error("Component must be wrapped within a ModalProvider");
     }
     const { isOpen, setIsOpen,setImage } = modalContext;
-    function handleImageChange() {
-      const fileInput = inputPrincipal.current;
-       /* const file = event.target.files ? event.target.files[0] : null;
-        if (file) {
-          setImage(file); // Guardar el objeto File directamente
-          setIsOpen(false);
-        }*/
-        if (fileInput && fileInput.files ) {
-          const selectedFile = fileInput.files[0];
-          setImage(selectedFile);
-          setIsOpen(false);
-          
-        }
-      
-     
+   // Usando useCallback para memorizar esta función
+   const handleImageChange = useCallback(() => {
+    const fileInput = inputPrincipal.current;
+    if (fileInput && fileInput.files) {
+        const selectedFile = fileInput.files[0];
+        setImage(selectedFile);
+        setIsOpen(false);
     }
+}, [setImage, setIsOpen]);
     
   
     return(

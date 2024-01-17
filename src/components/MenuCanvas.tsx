@@ -1,20 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState,useContext,useEffect } from 'react';
+import { ModalContext } from './context/ModalProvider';
 import './styles/MenuCanvas.css';
 
 const MenuCanvas: React.FC = () => {
-  const [sliderValue, setSliderValue] = useState<number>(100);
+  const modalContext = useContext(ModalContext);
+  if (!modalContext) {
+    throw new Error("Component must be wrapped within a ModalProvider");
+  }
+  const [sliderValue, setSliderValue] = useState<number>(modalContext.zoom);
   const maxSliderValue = 400; // Define el máximo valor para el slider
   const maxWidth = 300; // El máximo ancho que #selector puede tener
   const [origin,setOrigin] = useState<boolean>(true);
   const [graf,setGraf] = useState<boolean>(true);
+  useEffect(() => {
+    setSliderValue(modalContext.zoom);
+  }, [modalContext.zoom]);
   const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSliderValue(Number(event.target.value));
+    modalContext.setZoom(Number(event.target.value))
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let newValue = Number(event.target.value);
     newValue = Math.max(0, Math.min(newValue, maxSliderValue)); // Asegúrate de que el valor esté entre 0 y el máximo
     setSliderValue(newValue);
+    modalContext.setZoom(newValue);
   };
 
   // Calcula el ancho en píxeles
@@ -84,6 +94,7 @@ const MenuCanvas: React.FC = () => {
           <input
             type="range"
             min="0"
+            step="0.1"
             max={maxSliderValue}
             id="final"
             value={sliderValue}
@@ -101,6 +112,7 @@ const MenuCanvas: React.FC = () => {
             value={sliderValue}
             onChange={handleInputChange}
             className="valri"
+            
           />
           <div className="porchento">%</div>
         </div>

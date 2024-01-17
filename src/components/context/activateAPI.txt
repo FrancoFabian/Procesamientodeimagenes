@@ -1,1 +1,0 @@
-activate C:\Users\Franco\Documents\ProyetosParaportafolio\ReactTSX\Vite\apiImage\myenv

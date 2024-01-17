@@ -4,7 +4,7 @@ class MathImgC {
     
     public static resizeImageBicubic(img: ImageType, newWidth: number, newHeight: number): number[][][] {
         const srcArr = img.getArrayImg();
-        const resizedArr = this.initArray3D(newWidth, newHeight);
+        const resizedArr = MathImgC.initArray3D(newWidth, newHeight);
 
         const xRatio = img.getWidth() / newWidth;
         const yRatio = img.getHeight() / newHeight;
@@ -12,7 +12,7 @@ class MathImgC {
         for (let i = 0; i < newHeight; i++) {
             for (let j = 0; j < newWidth; j++) {
                 for (let channel = 0; channel < 3; channel++) {
-                    const pixel = this.getBicubicPixel(srcArr, channel, j * xRatio, i * yRatio);
+                    const pixel = MathImgC.getBicubicPixel(srcArr, channel, j * xRatio, i * yRatio);
                     resizedArr[channel][i][j] = Math.min(255, Math.max(0, Math.round(pixel)));
                 }
             }
@@ -35,7 +35,7 @@ class MathImgC {
 
                 // Verificar los límites de la imagen
                 if (xCur >= 0 && xCur < srcArr[0][0].length && yCur >= 0 && yCur < srcArr[0].length) {
-                    const weight = this.bicubicKernel(x - xCur) * this.bicubicKernel(y - yCur);
+                    const weight = MathImgC.bicubicKernel(x - xCur) * this.bicubicKernel(y - yCur);
                     sum += srcArr[channel][yCur][xCur] * weight;
                     weights += weight;
                 }

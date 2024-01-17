@@ -33,7 +33,7 @@ interface RangeSetting {
 }
 export interface OptionObject {
     title: string;
-    canvasI: (CanvasItem | null)[];
+    canvasI:CanvasItem[];
     Settings: (Setting | null | undefined)[];
     SettingsTypeSpecial: (SettingTypeSpecial | null)[];
     SettingsHyper: any[]; // Replace 'any' with a more specific type if needed

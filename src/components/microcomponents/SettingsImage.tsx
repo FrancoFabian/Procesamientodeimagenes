@@ -47,6 +47,14 @@ const SettingsImage: React.FC<{ onFileSelect?: (file: File) => void }> = ({ onFi
             settingRef.current.value = ''; // Restablece el input del archivo
         }
     };
+    const handleCloseClick2 = () => {
+        // Detiene la propagación del evento
+        setPreviewUrl(null);
+        if (settingRef.current) {
+            setCloseImg(false);
+            settingRef.current.value = ''; // Restablece el input del archivo
+        }
+    };
     const handleCancel = () =>{
         
         
@@ -62,6 +70,7 @@ const SettingsImage: React.FC<{ onFileSelect?: (file: File) => void }> = ({ onFi
     const handleBack = (event: React.MouseEvent) => {
         event.stopPropagation(); // Detiene la propagación del evento
         setExpandedIndex(null);
+        handleCloseClick2()
     }
     
     const selectFilter = (filterFunc: GeneralFilterFunction | null | undefined) => {

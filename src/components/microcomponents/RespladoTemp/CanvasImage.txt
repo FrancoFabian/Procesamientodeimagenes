@@ -7,7 +7,8 @@ interface CanvasComponentState {
     width: number;
     height: number;
   };
-  
+  //image: File; // Añadir prop para la imagen
+  //zoom: number;
 }
 
 interface CanvasImageProps {
@@ -15,8 +16,6 @@ interface CanvasImageProps {
     width: number;
     height: number;
   };
-  image: File | undefined | null; // Añadir prop para la imagen
-  zoom: number | null | undefined;
 }
 
 
@@ -31,7 +30,12 @@ class CanvasImage extends Component<CanvasImageProps, CanvasComponentState> {
   constructor(props: CanvasImageProps) {
     super(props);
     this.canvasRef = React.createRef<HTMLCanvasElement>();
-    
+    this.state = {
+      dimensions: {
+        width: props.dimensions.width,
+        height: props.dimensions.height
+      }
+    };
   }
   componentDidMount() {
     this.prevImage = this.context!.image;
@@ -39,14 +43,14 @@ class CanvasImage extends Component<CanvasImageProps, CanvasComponentState> {
     this.loadOriginalImage();
   }
 
-  componentDidUpdate(prevProps: CanvasImageProps) {
+  componentDidUpdate() {
   const { image, selectedFilter ,isSettings} = this.context!;
    console.log(selectedFilter+"FILTROOOOOOO")
   // Verifica si la imagen ha cambiado
-  
-  if (this.props.zoom !== prevProps.zoom || this.props.image !== prevProps.image) {
-    this.loadOriginalImage();
-    this.resetCanvasSize();
+  if (image !== this.prevImage) {
+   // this.resetCanvasSize();
+   this.loadOriginalImage();
+    this.prevImage = image;
   }
 
   // Verifica si el filtro seleccionado ha cambiado
@@ -59,33 +63,59 @@ class CanvasImage extends Component<CanvasImageProps, CanvasComponentState> {
   }
 }
 
-resetCanvasSize = () => {
-  const img = this.originalImage;
-  if (!img) return;
 
-  const { zoom } = this.props;
-  const canvas = this.canvasRef.current;
-  if (!canvas) return;
 
-  const ctx = canvas.getContext('2d',{ willReadFrequently: true });
-  if (!ctx) return;
-  if(zoom !== null && zoom !== undefined){
-    // Calcula las nuevas dimensiones
-  const newWidth = img.width * zoom / 100;
-  const newHeight = img.height * zoom / 100;
 
-  // Ajusta el tamaño del canvas
-  canvas.width = newWidth;
-  canvas.height = newHeight;
+resetCanvasSize =  () => {
+  const { image } = this.context!;
+  if (image instanceof Blob) {
+    const img = new Image();
+    img.onload = () => {
+      const maxWidth = this.props.dimensions.width;
+      const maxHeight = this.props.dimensions.height;
+      const canvasAspectRatio = maxWidth / maxHeight;
+      const imgAspectRatio = img.width / img.height;
+      let newWidth:number, newHeight:number;
 
-  // Redibuja la imagen en el canvas
-  ctx.imageSmoothingQuality = 'high';
-  ctx.drawImage(img, 0, 0, newWidth, newHeight);
-
+      if (imgAspectRatio > canvasAspectRatio) {
+        // La imagen es más ancha que el canvas
+        newWidth = maxWidth;
+        newHeight = maxWidth / imgAspectRatio;
+      } else {
+        // La imagen es más alta que el canvas
+        newHeight = maxHeight;
+        newWidth = maxHeight * imgAspectRatio;
+      }
+       // Calcula el porcentaje de zoom para ancho y alto
+       const widthZoom = (newWidth / img.width) * 100;
+       const heightZoom = (newHeight / img.height) * 100;
+ 
+       // Usa el menor de los dos porcentajes como el porcentaje de zoom
+       const zoomPercentage = Math.min(widthZoom, heightZoom);
+       this.context?.setZoom(zoomPercentage);
+      // Ahora actualiza el estado y dibuja la imagen en el canvas
+      this.setState({ dimensions: { width: newWidth, height: newHeight } }, () => {
+        const canvas = this.canvasRef.current;
+        if (canvas) {
+          canvas.width = newWidth;
+          canvas.height = newHeight;
+          console.log("WIDTH: "+canvas.width+" HEIGHT : "+canvas.height)
+          const ctx = canvas.getContext('2d',{ willReadFrequently: true });
+          if (ctx) {
+            ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = 'high'; // Asegurarse de que la calidad de la imagen sea alta
+            ctx.clearRect(0, 0, newWidth, newHeight);
+            ctx.drawImage(img, 0, 0, newWidth, newHeight);
+            
+          }
+        }
+      });
+    };
+    img.src = URL.createObjectURL(image);
+  } else {
+    console.error("La imagen proporcionada no es un Blob o File");
   }
-  
 };
-
 
 
 loadOriginalImage = () => {
@@ -132,18 +162,18 @@ applyFilter = (filterFunction: Function) => {
 
 
 
-render() {
-  const { width, height } = this.props.dimensions; // Usa props en lugar de state
-  return (
-    <canvas
-      ref={this.canvasRef}
-      style={{
-        width: `${width}px`,
-        height: `${height}px`
-      }}
-    />
-  );
-}
+  render() {
+    const { width, height } = this.state.dimensions;
+    return (
+      <canvas
+        ref={this.canvasRef}
+        style={{
+          width: `${width}px`,
+          height: `${height}px`
+        }}
+      />
+    );
+  }
 }
 
 CanvasImage.contextType = ModalContext;
